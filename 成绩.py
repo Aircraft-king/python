@@ -8,4 +8,5 @@ if a>=60:
         print("良")
     else: print("优")
 else: print("不及格")
+
 input(' ')
