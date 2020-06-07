@@ -1,3 +1,4 @@
+
 s = input("请输入字符串：")
 num = 0
 for i in s :
