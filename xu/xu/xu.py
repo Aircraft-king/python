@@ -159,19 +159,19 @@ def view_registration():
             print("性别：", user_dict[id]["sex"])
             print("电话：", user_dict[id]["phone"])
             print("年龄：", user_dict[id]["age"])
-            if user_dict[id]["reservation_num"] == 1:
+            if user_dict[id]["reservation_num"] == '1':
                 print("您预约科室为外科")
-            elif user_dict[id]["reservation_num"] == 2:
+            elif user_dict[id]["reservation_num"] == '2':
                 print("您预约科室为内科")
-            elif user_dict[id]["reservation_num"] == 3:
+            elif user_dict[id]["reservation_num"] == '3':
                 print("您预约科室为五官科")
-            elif user_dict[id]["reservation_num"] == 4:
+            elif user_dict[id]["reservation_num"] == '4':
                 print("您预约科室为急诊科")
-            elif user_dict[id]["reservation_num"] == 5:
+            elif user_dict[id]["reservation_num"] == '5':
                 print("您预约科室为其他科室")
             else:
                 print("您的预约为健康体检")
-            if user_dict[id]["doctor_num"] == 1:
+            if user_dict[id]["doctor_num"] == '1':
                 print("您的预约为专家号")
             else:
                 print("您的预约为普通号")
@@ -183,27 +183,19 @@ def write():
     """将用户写入文件"""
     # 写入的方式打开文件
     # f = open(r'C:\Users\asus\Desktop\text.txt', 'wb')
-    f = open(r'text.txt', 'wb')
-    pickle.dump(user_dict, f)
-    # 关闭文件
-    f.close()
-
-def read():
-    # file = r'C:\Users\asus\Desktop\text.txt'
-    file = r'text.txt'
     try:
-        # 读的方式打开文件
-        f = open(file, 'rb')
-        # 拆封
-        user_dict = pickle.load(f)
-        print("已经保存用户{}位".format(len(user_dict)))
-        # print(user_dict)
-        # 关闭文件
-        f.close()
-    except EOFError:
-        print("尚未存在用户")
-    except FileNotFoundError:
-        f.close()
+        f = open("text.txt", "w")
+    except Exception as e:
+        f = open("text.txt", "x")
+    for info in user_dict:
+        strInfo =info+','+user_dict[info]['name']+','+user_dict[info]['sex']+','+\
+            user_dict[info]['phone']+','+user_dict[info]['age']+','+str(user_dict[info]['reservation_num'])\
+            +','+str(user_dict[info]['doctor_num'])+','+str(user_dict[info]['queue_num'])+','+str(user_dict[info]['flag'])
+        f.write(str(strInfo)+'\n')
+    f.close()
+    pass
+
+
 
 def menu():
     print("-" * 50)
@@ -219,7 +211,6 @@ def menu():
     print("-" * 50)
 
 def main():
-    read()
     flag = 1
     while flag:
         try:
@@ -248,4 +239,3 @@ def main():
             print("请输入相应的数字")
 
 main()
-
